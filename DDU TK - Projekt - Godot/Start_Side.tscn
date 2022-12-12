@@ -1,31 +1,130 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://main_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Start_Side.gd" type="Script" id=2]
 [ext_resource path="res://46441(1).png" type="Texture" id=3]
+[ext_resource path="res://DEJAVUSANS.TTF" type="DynamicFontData" id=4]
+
+[sub_resource type="DynamicFont" id=8]
+size = 33
+font_data = ExtResource( 4 )
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 0.196078 )
 
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 1, 1, 1, 0.403922 )
+
+[sub_resource type="StyleBoxEmpty" id=4]
+
 [sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="Animation" id=5]
+resource_name = "Hide"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Side_bar:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 2.2974, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -55, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TabContainer:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 2.2974, 1 ),
+"update": 0,
+"values": [ Vector2( 25, 0 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Side_bar:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -55, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TabContainer:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "Show"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Side_bar:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.366022, 2.2974 ),
+"update": 0,
+"values": [ Vector2( -55, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TabContainer:rect_position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 0.366022, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 25, 0 ) ]
+}
 
 [node name="Start_Side" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_bottom = -100.0
 script = ExtResource( 2 )
 
 [node name="TabContainer" type="TabContainer" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = -3.0
+margin_right = -3.0
+margin_bottom = 40.0
 mouse_filter = 1
 
 [node name="Log_Ind_valg" type="Tabs" parent="TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -8.0
-margin_bottom = -36.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
 
 [node name="HBoxContainer" type="VBoxContainer" parent="TabContainer/Log_Ind_valg"]
 anchor_left = 0.5
@@ -33,30 +132,31 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 margin_left = -169.0
-margin_top = -236.0
+margin_top = -185.0
 margin_right = 169.0
 custom_constants/separation = 20
 alignment = 1
 
 [node name="Button" type="Button" parent="TabContainer/Log_Ind_valg/HBoxContainer"]
-margin_top = 68.0
+margin_top = 42.0
 margin_right = 338.0
-margin_bottom = 108.0
+margin_bottom = 82.0
 rect_min_size = Vector2( 200, 40 )
 theme = ExtResource( 1 )
 text = "Log ind som elev"
 
 [node name="Button2" type="Button" parent="TabContainer/Log_Ind_valg/HBoxContainer"]
-margin_top = 128.0
+margin_top = 102.0
 margin_right = 338.0
-margin_bottom = 168.0
+margin_bottom = 142.0
 rect_min_size = Vector2( 200, 40 )
 theme = ExtResource( 1 )
 text = "Log ind som lærer"
 
 [node name="Log_Ind" type="Tabs" parent="TabContainer"]
+visible = false
 margin_right = 1024.0
-margin_bottom = 600.0
+margin_bottom = 500.0
 
 [node name="HBoxContainer" type="VBoxContainer" parent="TabContainer/Log_Ind"]
 anchor_left = 0.5
@@ -94,19 +194,44 @@ rect_min_size = Vector2( 200, 40 )
 theme = ExtResource( 1 )
 text = "Log ind"
 
-[node name="ColorRect" type="ColorRect" parent="."]
-modulate = Color( 0.384314, 0.470588, 0.921569, 1 )
-anchor_bottom = 1.0
-margin_right = 48.0
-margin_bottom = 94.0
+[node name="Elev_Side" type="Tabs" parent="TabContainer"]
+margin_right = 1024.0
+margin_bottom = 500.0
 
-[node name="Back_Button" type="Button" parent="."]
+[node name="ColorRect" type="ColorRect" parent="TabContainer/Elev_Side"]
+anchor_right = 1.0
+margin_bottom = 61.0
+theme = ExtResource( 1 )
+color = Color( 0, 0, 0, 1 )
+
+[node name="Label" type="Label" parent="TabContainer/Elev_Side/ColorRect"]
+margin_left = 8.0
+margin_top = 9.0
+margin_right = 805.0
+margin_bottom = 60.0
+custom_fonts/font = SubResource( 8 )
+text = "Hej din ulækre forpulede fucking møg læderfjæs"
+
+[node name="Side_bar" type="Control" parent="."]
+margin_left = -55.0
+margin_right = -7.0
+margin_bottom = 526.0
+
+[node name="ColorRect" type="ColorRect" parent="Side_bar"]
+anchor_bottom = 1.833
+margin_right = 48.0
+margin_bottom = 64.0
+color = Color( 0.172549, 0.207843, 0.266667, 1 )
+
+[node name="Back_Button" type="Button" parent="Side_bar"]
 margin_right = 48.0
 margin_bottom = 48.0
-custom_styles/focus = SubResource( 1 )
+custom_styles/hover = SubResource( 1 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
 custom_styles/normal = SubResource( 2 )
 
-[node name="TextureRect" type="TextureRect" parent="Back_Button"]
+[node name="TextureRect" type="TextureRect" parent="Side_bar/Back_Button"]
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 44.0
@@ -114,6 +239,13 @@ margin_bottom = 44.0
 texture = ExtResource( 3 )
 expand = true
 
-[connection signal="pressed" from="TabContainer/Log_Ind_valg/HBoxContainer/Button" to="." method="go_to_login"]
-[connection signal="pressed" from="TabContainer/Log_Ind_valg/HBoxContainer/Button2" to="." method="go_to_login"]
-[connection signal="pressed" from="Back_Button" to="." method="go_back"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "RESET"
+anims/Hide = SubResource( 5 )
+anims/RESET = SubResource( 6 )
+anims/Show = SubResource( 7 )
+
+[connection signal="pressed" from="TabContainer/Log_Ind_valg/HBoxContainer/Button" to="." method="go_to_tab" binds= [ 1 ]]
+[connection signal="pressed" from="TabContainer/Log_Ind_valg/HBoxContainer/Button2" to="." method="go_to_tab" binds= [ 1 ]]
+[connection signal="pressed" from="TabContainer/Log_Ind/HBoxContainer/Button3" to="." method="go_to_tab" binds= [ 2 ]]
+[connection signal="pressed" from="Side_bar/Back_Button" to="." method="go_back"]
