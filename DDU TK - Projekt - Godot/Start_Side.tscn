@@ -1,0 +1,119 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://main_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Start_Side.gd" type="Script" id=2]
+[ext_resource path="res://46441(1).png" type="Texture" id=3]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 1, 1, 1, 0.196078 )
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[node name="Start_Side" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="TabContainer" type="TabContainer" parent="."]
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 1
+
+[node name="Log_Ind_valg" type="Tabs" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -8.0
+margin_bottom = -36.0
+
+[node name="HBoxContainer" type="VBoxContainer" parent="TabContainer/Log_Ind_valg"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -169.0
+margin_top = -236.0
+margin_right = 169.0
+custom_constants/separation = 20
+alignment = 1
+
+[node name="Button" type="Button" parent="TabContainer/Log_Ind_valg/HBoxContainer"]
+margin_top = 68.0
+margin_right = 338.0
+margin_bottom = 108.0
+rect_min_size = Vector2( 200, 40 )
+theme = ExtResource( 1 )
+text = "Log ind som elev"
+
+[node name="Button2" type="Button" parent="TabContainer/Log_Ind_valg/HBoxContainer"]
+margin_top = 128.0
+margin_right = 338.0
+margin_bottom = 168.0
+rect_min_size = Vector2( 200, 40 )
+theme = ExtResource( 1 )
+text = "Log ind som lærer"
+
+[node name="Log_Ind" type="Tabs" parent="TabContainer"]
+margin_right = 1024.0
+margin_bottom = 600.0
+
+[node name="HBoxContainer" type="VBoxContainer" parent="TabContainer/Log_Ind"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -169.0
+margin_top = -236.0
+margin_right = 169.0
+custom_constants/separation = 20
+alignment = 1
+
+[node name="Button" type="LineEdit" parent="TabContainer/Log_Ind/HBoxContainer"]
+margin_top = 38.0
+margin_right = 338.0
+margin_bottom = 78.0
+rect_min_size = Vector2( 200, 40 )
+theme = ExtResource( 1 )
+placeholder_text = "Brugernavn"
+
+[node name="Button2" type="LineEdit" parent="TabContainer/Log_Ind/HBoxContainer"]
+margin_top = 98.0
+margin_right = 338.0
+margin_bottom = 138.0
+rect_min_size = Vector2( 200, 40 )
+theme = ExtResource( 1 )
+secret = true
+placeholder_text = "Adgangskode"
+
+[node name="Button3" type="Button" parent="TabContainer/Log_Ind/HBoxContainer"]
+margin_top = 158.0
+margin_right = 338.0
+margin_bottom = 198.0
+rect_min_size = Vector2( 200, 40 )
+theme = ExtResource( 1 )
+text = "Log ind"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color( 0.384314, 0.470588, 0.921569, 1 )
+anchor_bottom = 1.0
+margin_right = 48.0
+margin_bottom = 94.0
+
+[node name="Back_Button" type="Button" parent="."]
+margin_right = 48.0
+margin_bottom = 48.0
+custom_styles/focus = SubResource( 1 )
+custom_styles/normal = SubResource( 2 )
+
+[node name="TextureRect" type="TextureRect" parent="Back_Button"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 44.0
+margin_bottom = 44.0
+texture = ExtResource( 3 )
+expand = true
+
+[connection signal="pressed" from="TabContainer/Log_Ind_valg/HBoxContainer/Button" to="." method="go_to_login"]
+[connection signal="pressed" from="TabContainer/Log_Ind_valg/HBoxContainer/Button2" to="." method="go_to_login"]
+[connection signal="pressed" from="Back_Button" to="." method="go_back"]
