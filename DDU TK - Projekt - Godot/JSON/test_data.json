@@ -1,0 +1,47 @@
+[
+	{
+		"Navn" : "Brøker",
+		"Spørgsmål" : [
+		{
+			"Question":"Forlæng brøken 2/5 med 3",
+			"Svar":"6/15"
+		},		
+		{
+			"Question":"Forkort brøken 5/10 med 5",
+			"Svar":"1/2"
+		},
+		{
+			"Question":"Beregn 3*2/3",
+			"Svar":"6/3"
+		},
+		{
+			"Question":"Bergen 4*4+1/4?",
+			"Svar":"17"
+		},
+		{
+			"Question":"Beregn 4+3/5-4/5",
+			"Svar":"3+4/5"
+		},
+		{
+			"Question":"Beregn 8+2/7-5+4/7",
+			"Svar":"2+5/7"
+		},
+		{
+			"Question":"Jens har fri fra arbejde på lørdage og søndage. Hvor stor del af ugen har Jens fri?",
+			"Svar":"2/7"
+		},
+		{
+			"Question":"Nikolas spiste 1 pizza, Thomas spiste 1+1/4 og Line 4/5. Hvor meget pizza spiste de tilsammen?",
+			"Svar":"3+1/20"
+		},
+		{
+			"Question":"Omskriv 1/8 til decimaltal",
+			"Svar":"0,125"
+		},
+		{
+			"Question":"Beregn 1/2+1/4",
+			"Svar":"3/4"
+		},
+		]
+	}
+]

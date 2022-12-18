@@ -1,15 +1,130 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://main_theme.tres" type="Theme" id=1]
 [ext_resource path="res://Start_Side.gd" type="Script" id=2]
 [ext_resource path="res://46441(1).png" type="Texture" id=3]
 [ext_resource path="res://DEJAVUSANS.TTF" type="DynamicFontData" id=4]
+[ext_resource path="res://DEJAVUSANS-BOLD.TTF" type="DynamicFontData" id=5]
+
+[sub_resource type="DynamicFont" id=9]
+use_mipmaps = true
+font_data = ExtResource( 5 )
+
+[sub_resource type="Animation" id=10]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "warning"
+length = 3.0
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.04, 0.08, 2, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 0, 0, 0 ) ]
+}
 
 [sub_resource type="DynamicFont" id=8]
 size = 33
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFontData" id=12]
+font_path = "res://DEJAVUSANS-BOLD.TTF"
+
+[sub_resource type="DynamicFont" id=13]
+size = 24
+use_mipmaps = true
+use_filter = true
+font_data = SubResource( 12 )
+
+[sub_resource type="Animation" id=14]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "correct"
+length = 0.1
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.04, 0.08 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 0, 1, 0, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Label:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ "Korrekt", "Korrekt" ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "wrong"
+length = 0.2
+step = 0.02
+tracks/0/type = "value"
+tracks/0/path = NodePath("Label:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.04, 0.08 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ) ]
+}
+
+[sub_resource type="DynamicFont" id=17]
+size = 32
+font_data = ExtResource( 5 )
+
+[sub_resource type="DynamicFont" id=18]
+size = 22
+font_data = ExtResource( 5 )
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 1, 1, 0.196078 )
@@ -115,7 +230,7 @@ self_modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = -32.0
-margin_bottom = 8.0
+margin_bottom = -32.0
 mouse_filter = 1
 
 [node name="Log_Ind_valg" type="Tabs" parent="TabContainer"]
@@ -156,8 +271,12 @@ text = "Log ind som lærer"
 
 [node name="Log_Ind" type="Tabs" parent="TabContainer"]
 visible = false
-margin_right = 1024.0
-margin_bottom = 500.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
 
 [node name="HBoxContainer" type="VBoxContainer" parent="TabContainer/Log_Ind"]
 anchor_left = 0.5
@@ -170,34 +289,54 @@ margin_right = 169.0
 custom_constants/separation = 20
 alignment = 1
 
-[node name="Button" type="LineEdit" parent="TabContainer/Log_Ind/HBoxContainer"]
-margin_top = 38.0
+[node name="Label" type="Label" parent="TabContainer/Log_Ind/HBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 1, 1, 1, 0 )
+margin_top = 18.0
 margin_right = 338.0
-margin_bottom = 78.0
+margin_bottom = 37.0
+custom_fonts/font = SubResource( 9 )
+text = "Fejl:"
+
+[node name="Button" type="LineEdit" parent="TabContainer/Log_Ind/HBoxContainer"]
+margin_top = 57.0
+margin_right = 338.0
+margin_bottom = 97.0
 rect_min_size = Vector2( 200, 40 )
 theme = ExtResource( 1 )
+max_length = 25
 placeholder_text = "Brugernavn"
 
 [node name="Button2" type="LineEdit" parent="TabContainer/Log_Ind/HBoxContainer"]
-margin_top = 98.0
+margin_top = 117.0
 margin_right = 338.0
-margin_bottom = 138.0
+margin_bottom = 157.0
 rect_min_size = Vector2( 200, 40 )
 theme = ExtResource( 1 )
+max_length = 25
 secret = true
 placeholder_text = "Adgangskode"
 
 [node name="Button3" type="Button" parent="TabContainer/Log_Ind/HBoxContainer"]
-margin_top = 158.0
+margin_top = 177.0
 margin_right = 338.0
-margin_bottom = 198.0
+margin_bottom = 217.0
 rect_min_size = Vector2( 200, 40 )
 theme = ExtResource( 1 )
 text = "Log ind"
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TabContainer/Log_Ind/HBoxContainer"]
+anims/RESET = SubResource( 10 )
+anims/warning = SubResource( 11 )
+
 [node name="Elev_Side" type="Tabs" parent="TabContainer"]
-margin_right = 1024.0
-margin_bottom = 500.0
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
 
 [node name="ColorRect" type="ColorRect" parent="TabContainer/Elev_Side"]
 anchor_right = 1.0
@@ -222,9 +361,9 @@ margin_right = 2.0
 margin_bottom = 199.0
 
 [node name="Button3" type="Button" parent="TabContainer/Elev_Side/CenterContainer"]
-margin_left = 413.0
+margin_left = 409.0
 margin_top = 70.0
-margin_right = 613.0
+margin_right = 609.0
 margin_bottom = 110.0
 rect_min_size = Vector2( 200, 40 )
 theme = ExtResource( 1 )
@@ -255,123 +394,576 @@ margin_bottom = 639.0
 [node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Elev_Side/Panel2"]
 anchor_bottom = 1.0
 margin_left = 40.0
-margin_top = 3.0
+margin_top = 17.0
 margin_right = 1052.0
 margin_bottom = -514.0
 theme = ExtResource( 1 )
 scroll_horizontal_enabled = false
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Elev_Side/Panel2/ScrollContainer"]
-margin_right = 500.0
-margin_bottom = 590.0
 custom_constants/separation = 10
 
-[node name="Button3" type="Button" parent="TabContainer/Elev_Side/Panel2/ScrollContainer/VBoxContainer"]
-margin_right = 500.0
-margin_bottom = 40.0
+[node name="Button3" type="Button" parent="TabContainer/Elev_Side"]
+margin_left = -909.0
+margin_top = 263.0
+margin_right = -409.0
+margin_bottom = 303.0
 rect_min_size = Vector2( 500, 40 )
 theme = ExtResource( 1 )
 text = "Mat test 1a1 - Linære Funktioner"
 align = 0
 
-[node name="Button4" type="Button" parent="TabContainer/Elev_Side/Panel2/ScrollContainer/VBoxContainer"]
+[node name="Elev_Test" type="Tabs" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Panel" type="Panel" parent="TabContainer/Elev_Test"]
+margin_left = -27.0
+margin_right = 1376.0
+margin_bottom = 53.0
+
+[node name="Label" type="Label" parent="TabContainer/Elev_Test/Panel"]
+margin_left = 75.0
+margin_top = 16.0
+margin_right = 242.0
+margin_bottom = 35.0
+theme = ExtResource( 1 )
+text = "Opgave - 1"
+
+[node name="Label2" type="Label" parent="TabContainer/Elev_Test"]
+anchor_right = 1.0
+margin_left = 48.0
+margin_top = 79.0
+margin_right = -45.0
+margin_bottom = 108.0
+theme = ExtResource( 1 )
+custom_fonts/font = SubResource( 13 )
+text = "Spørgsmål"
+
+[node name="Label" type="Label" parent="TabContainer/Elev_Test"]
+modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color( 1, 1, 1, 0 )
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 47.0
+margin_top = -73.0
+margin_right = 385.0
+margin_bottom = -54.0
+custom_fonts/font = SubResource( 9 )
+text = "Korrekt"
+
+[node name="Button" type="LineEdit" parent="TabContainer/Elev_Test"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 47.0
+margin_top = -37.0
+margin_right = 385.0
+margin_bottom = 3.0
+rect_min_size = Vector2( 200, 40 )
+theme = ExtResource( 1 )
+max_length = 25
+placeholder_text = "Indtast Svar"
+
+[node name="Button3" type="Button" parent="TabContainer/Elev_Test"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 47.0
+margin_top = 15.0
+margin_right = 385.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 200, 40 )
+theme = ExtResource( 1 )
+text = "Svar"
+
+[node name="Button4" type="Button" parent="TabContainer/Elev_Test"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -374.0
+margin_top = 15.0
+margin_right = -36.0
+margin_bottom = 55.0
+rect_min_size = Vector2( 200, 40 )
+theme = ExtResource( 1 )
+disabled = true
+text = "Næste"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TabContainer/Elev_Test"]
+anims/RESET = SubResource( 14 )
+anims/correct = SubResource( 15 )
+anims/wrong = SubResource( 16 )
+
+[node name="Laerer_Side" type="Tabs" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="ColorRect" type="ColorRect" parent="TabContainer/Laerer_Side"]
+anchor_right = 1.0
+margin_left = -23.0
+margin_right = 1241.0
+margin_bottom = 57.0
+theme = ExtResource( 1 )
+color = Color( 0.172549, 0.207843, 0.266667, 1 )
+
+[node name="Label" type="Label" parent="TabContainer/Laerer_Side/ColorRect"]
+margin_left = 68.0
+margin_top = 9.0
+margin_right = 872.0
+margin_bottom = 60.0
+custom_fonts/font = SubResource( 8 )
+text = "Hej fuckfjæs"
+
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/Laerer_Side"]
+anchor_right = 1.0
+margin_top = 117.0
+margin_bottom = 559.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Laerer_Side/CenterContainer"]
+margin_left = 308.0
+margin_top = 161.0
+margin_right = 708.0
+margin_bottom = 281.0
+rect_min_size = Vector2( 400, 0 )
+custom_constants/separation = 40
+
+[node name="Button3" type="Button" parent="TabContainer/Laerer_Side/CenterContainer/VBoxContainer"]
+margin_right = 400.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 200, 40 )
+theme = ExtResource( 1 )
+text = "Opret/Slet Klasse"
+
+[node name="Button4" type="Button" parent="TabContainer/Laerer_Side/CenterContainer/VBoxContainer"]
+margin_top = 80.0
+margin_right = 400.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 200, 40 )
+theme = ExtResource( 1 )
+text = "Opret/Fjern Test"
+
+[node name="Klasse_side_1" type="Tabs" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/Klasse_side_1"]
+anchor_right = 1.0
+margin_top = 117.0
+margin_bottom = 559.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Klasse_side_1/CenterContainer"]
+margin_left = 308.0
+margin_top = 121.0
+margin_right = 708.0
+margin_bottom = 321.0
+rect_min_size = Vector2( 400, 0 )
+custom_constants/separation = 40
+
+[node name="Button3" type="Button" parent="TabContainer/Klasse_side_1/CenterContainer/VBoxContainer"]
+margin_right = 400.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 200, 40 )
+theme = ExtResource( 1 )
+text = "Opret klasse"
+
+[node name="Button4" type="Button" parent="TabContainer/Klasse_side_1/CenterContainer/VBoxContainer"]
+margin_top = 80.0
+margin_right = 400.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 200, 40 )
+theme = ExtResource( 1 )
+text = "Tilføj/Fjern elever fra klasse"
+
+[node name="Button5" type="Button" parent="TabContainer/Klasse_side_1/CenterContainer/VBoxContainer"]
+margin_top = 160.0
+margin_right = 400.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 200, 40 )
+theme = ExtResource( 1 )
+text = "Slet klasse"
+
+[node name="Opret_Klasse_Side_1" type="Tabs" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="ColorRect" type="ColorRect" parent="TabContainer/Opret_Klasse_Side_1"]
+anchor_right = 1.0
+margin_left = -23.0
+margin_right = 1241.0
+margin_bottom = 57.0
+theme = ExtResource( 1 )
+color = Color( 0.172549, 0.207843, 0.266667, 1 )
+
+[node name="Label" type="Label" parent="TabContainer/Opret_Klasse_Side_1/ColorRect"]
+margin_left = 68.0
+margin_top = 9.0
+margin_right = 872.0
+margin_bottom = 60.0
+custom_fonts/font = SubResource( 8 )
+text = "Vælg Klasse Navn"
+
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/Opret_Klasse_Side_1"]
+anchor_right = 1.0
+margin_top = 88.0
+margin_bottom = 552.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Opret_Klasse_Side_1/CenterContainer"]
+margin_left = 308.0
+margin_top = 182.0
+margin_right = 708.0
+margin_bottom = 282.0
+rect_min_size = Vector2( 400, 0 )
+custom_constants/separation = 20
+
+[node name="LineEdit" type="LineEdit" parent="TabContainer/Opret_Klasse_Side_1/CenterContainer/VBoxContainer"]
+margin_right = 400.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+theme = ExtResource( 1 )
+placeholder_text = "Indtast navn her"
+
+[node name="Button4" type="Button" parent="TabContainer/Opret_Klasse_Side_1/CenterContainer/VBoxContainer"]
+margin_top = 60.0
+margin_right = 400.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 200, 40 )
+theme = ExtResource( 1 )
+text = "Opret klasse"
+
+[node name="Rediger_Klasse_Valg" type="Tabs" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Button3" type="Button" parent="TabContainer/Rediger_Klasse_Valg"]
+margin_left = -479.0
+margin_top = 175.0
+margin_right = -279.0
+margin_bottom = 215.0
+rect_min_size = Vector2( 400, 40 )
+theme = ExtResource( 1 )
+text = "Opret Klasse"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Rediger_Klasse_Valg"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -4.0
+margin_top = 2.0
+margin_right = 8.0
+margin_bottom = 14.0
+theme = ExtResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Rediger_Klasse_Valg/ScrollContainer"]
+margin_right = 400.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 400, 40 )
+custom_constants/separation = 20
+
+[node name="Rediger_Klasser2" type="Tabs" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Panel3" type="Panel" parent="TabContainer/Rediger_Klasser2"]
+anchor_right = 1.0
+margin_left = 11.0
+margin_top = 24.0
+margin_right = -22.0
+margin_bottom = 77.0
+
+[node name="Label" type="Label" parent="TabContainer/Rediger_Klasser2/Panel3"]
+margin_left = 75.0
+margin_top = 16.0
+margin_right = 242.0
+margin_bottom = 35.0
+theme = ExtResource( 1 )
+text = "Elever der er i klassen"
+
+[node name="Panel4" type="Panel" parent="TabContainer/Rediger_Klasser2/Panel3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 54.0
+margin_right = -33.0
+margin_bottom = 1.0
+rect_min_size = Vector2( 983, 200 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Rediger_Klasser2/Panel3/Panel4"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 11.0
+margin_top = 17.0
+margin_right = -11.0
+margin_bottom = -46.0
+theme = ExtResource( 1 )
+scroll_horizontal_enabled = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Rediger_Klasser2/Panel3/Panel4/ScrollContainer"]
+custom_constants/separation = 10
+
+[node name="Panel" type="Panel" parent="TabContainer/Rediger_Klasser2"]
+anchor_right = 1.0
+margin_left = 11.0
+margin_top = 314.0
+margin_right = -22.0
+margin_bottom = 367.0
+
+[node name="Label" type="Label" parent="TabContainer/Rediger_Klasser2/Panel"]
+margin_left = 75.0
+margin_top = 16.0
+margin_right = 242.0
+margin_bottom = 35.0
+theme = ExtResource( 1 )
+text = "Elever der ikke er i klassen"
+
+[node name="Panel5" type="Panel" parent="TabContainer/Rediger_Klasser2/Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 3.0
+margin_top = 55.0
+margin_right = -30.0
+margin_bottom = 2.0
+rect_min_size = Vector2( 983, 200 )
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Rediger_Klasser2/Panel/Panel5"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 11.0
+margin_top = 17.0
+margin_right = -11.0
+margin_bottom = -21.0
+theme = ExtResource( 1 )
+scroll_horizontal_enabled = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Rediger_Klasser2/Panel/Panel5/ScrollContainer"]
+custom_constants/separation = 10
+
+[node name="Button3" type="Button" parent="TabContainer/Rediger_Klasser2"]
+margin_left = -480.0
+margin_top = -135.0
+margin_right = 20.0
+margin_bottom = -95.0
+rect_min_size = Vector2( 500, 40 )
+theme = ExtResource( 1 )
+text = "Mat test 1a1 - Linære Funktioner"
+align = 0
+
+[node name="Fjern_Klasse" type="Tabs" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Button3" type="Button" parent="TabContainer/Fjern_Klasse"]
+margin_left = -479.0
+margin_top = 175.0
+margin_right = -279.0
+margin_bottom = 215.0
+rect_min_size = Vector2( 400, 40 )
+theme = ExtResource( 1 )
+text = "Opret Klasse"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Fjern_Klasse"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 12.0
+margin_bottom = 12.0
+theme = ExtResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Fjern_Klasse/ScrollContainer"]
+custom_constants/separation = 20
+
+[node name="Tildel_test_klasse_valg" type="Tabs" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Button3" type="Button" parent="TabContainer/Tildel_test_klasse_valg"]
+margin_left = -479.0
+margin_top = 175.0
+margin_right = -279.0
+margin_bottom = 215.0
+rect_min_size = Vector2( 400, 40 )
+theme = ExtResource( 1 )
+text = "Opret Klasse"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Tildel_test_klasse_valg"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -4.0
+margin_top = 2.0
+margin_right = 8.0
+margin_bottom = 14.0
+theme = ExtResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Tildel_test_klasse_valg/ScrollContainer"]
+margin_right = 400.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 400, 40 )
+custom_constants/separation = 20
+
+[node name="Laerer_Test_Muligheder" type="Tabs" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="ColorRect" type="ColorRect" parent="TabContainer/Laerer_Test_Muligheder"]
+anchor_right = 1.0
+margin_left = -23.0
+margin_right = 1241.0
+margin_bottom = 57.0
+theme = ExtResource( 1 )
+color = Color( 0.172549, 0.207843, 0.266667, 1 )
+
+[node name="Label" type="Label" parent="TabContainer/Laerer_Test_Muligheder/ColorRect"]
+margin_left = 68.0
+margin_top = 9.0
+margin_right = 872.0
+margin_bottom = 60.0
+custom_fonts/font = SubResource( 8 )
+text = "Hej fuckfjæs"
+
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/Laerer_Test_Muligheder"]
+anchor_right = 1.0
+margin_top = 117.0
+margin_bottom = 559.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Laerer_Test_Muligheder/CenterContainer"]
+margin_left = 308.0
+margin_top = 161.0
+margin_right = 708.0
+margin_bottom = 281.0
+rect_min_size = Vector2( 400, 0 )
+custom_constants/separation = 40
+
+[node name="Button3" type="Button" parent="TabContainer/Laerer_Test_Muligheder/CenterContainer/VBoxContainer"]
+margin_right = 400.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 200, 40 )
+theme = ExtResource( 1 )
+text = "Opret Test"
+
+[node name="Button4" type="Button" parent="TabContainer/Laerer_Test_Muligheder/CenterContainer/VBoxContainer"]
+margin_top = 80.0
+margin_right = 400.0
+margin_bottom = 120.0
+rect_min_size = Vector2( 200, 40 )
+theme = ExtResource( 1 )
+text = "Fjern Test"
+
+[node name="Tildel_test_valg" type="Tabs" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="Button3" type="Button" parent="TabContainer/Tildel_test_valg"]
+visible = false
+margin_left = -479.0
+margin_top = 175.0
+margin_right = -279.0
+margin_bottom = 215.0
+rect_min_size = Vector2( 400, 40 )
+theme = ExtResource( 1 )
+text = "Opret Klasse"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Tildel_test_valg"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -4.0
+margin_top = 2.0
+margin_right = 8.0
+margin_bottom = 14.0
+theme = ExtResource( 1 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Tildel_test_valg/ScrollContainer"]
+margin_right = 400.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 400, 40 )
+custom_constants/separation = 20
+
+[node name="Test_resultat" type="Tabs" parent="TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Test_resultat"]
+anchor_right = 1.0
+margin_top = 181.0
+margin_bottom = 221.0
+custom_constants/separation = 12
+
+[node name="Label" type="Label" parent="TabContainer/Test_resultat/VBoxContainer"]
+margin_right = 1016.0
+margin_bottom = 38.0
+custom_fonts/font = SubResource( 17 )
+text = "Du svarede 10/10 spørgsmål rigtigt"
+align = 1
+
+[node name="Label2" type="Label" parent="TabContainer/Test_resultat/VBoxContainer"]
 margin_top = 50.0
-margin_right = 500.0
-margin_bottom = 90.0
-rect_min_size = Vector2( 500, 40 )
-theme = ExtResource( 1 )
-text = "Se tidligere tests"
-align = 0
+margin_right = 1016.0
+margin_bottom = 77.0
+custom_fonts/font = SubResource( 18 )
+text = "Din karakter er: 7"
+align = 1
 
-[node name="Button5" type="Button" parent="TabContainer/Elev_Side/Panel2/ScrollContainer/VBoxContainer"]
-margin_top = 100.0
-margin_right = 500.0
-margin_bottom = 140.0
-rect_min_size = Vector2( 500, 40 )
-theme = ExtResource( 1 )
-text = "Se tidligere tests"
-align = 0
+[node name="CenterContainer" type="CenterContainer" parent="TabContainer/Test_resultat/VBoxContainer"]
+margin_top = 89.0
+margin_right = 1016.0
+margin_bottom = 129.0
 
-[node name="Button6" type="Button" parent="TabContainer/Elev_Side/Panel2/ScrollContainer/VBoxContainer"]
-margin_top = 150.0
-margin_right = 500.0
-margin_bottom = 190.0
-rect_min_size = Vector2( 500, 40 )
+[node name="Button3" type="Button" parent="TabContainer/Test_resultat/VBoxContainer/CenterContainer"]
+margin_left = 408.0
+margin_right = 608.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 200, 40 )
 theme = ExtResource( 1 )
-text = "Se tidligere tests"
-align = 0
-
-[node name="Button7" type="Button" parent="TabContainer/Elev_Side/Panel2/ScrollContainer/VBoxContainer"]
-margin_top = 200.0
-margin_right = 500.0
-margin_bottom = 240.0
-rect_min_size = Vector2( 500, 40 )
-theme = ExtResource( 1 )
-text = "Se tidligere tests"
-align = 0
-
-[node name="Button8" type="Button" parent="TabContainer/Elev_Side/Panel2/ScrollContainer/VBoxContainer"]
-margin_top = 250.0
-margin_right = 500.0
-margin_bottom = 290.0
-rect_min_size = Vector2( 500, 40 )
-theme = ExtResource( 1 )
-text = "Se tidligere tests"
-align = 0
-
-[node name="Button9" type="Button" parent="TabContainer/Elev_Side/Panel2/ScrollContainer/VBoxContainer"]
-margin_top = 300.0
-margin_right = 500.0
-margin_bottom = 340.0
-rect_min_size = Vector2( 500, 40 )
-theme = ExtResource( 1 )
-text = "Se tidligere tests"
-align = 0
-
-[node name="Button10" type="Button" parent="TabContainer/Elev_Side/Panel2/ScrollContainer/VBoxContainer"]
-margin_top = 350.0
-margin_right = 500.0
-margin_bottom = 390.0
-rect_min_size = Vector2( 500, 40 )
-theme = ExtResource( 1 )
-text = "Se tidligere tests"
-align = 0
-
-[node name="Button11" type="Button" parent="TabContainer/Elev_Side/Panel2/ScrollContainer/VBoxContainer"]
-margin_top = 400.0
-margin_right = 500.0
-margin_bottom = 440.0
-rect_min_size = Vector2( 500, 40 )
-theme = ExtResource( 1 )
-text = "Se tidligere tests"
-align = 0
-
-[node name="Button12" type="Button" parent="TabContainer/Elev_Side/Panel2/ScrollContainer/VBoxContainer"]
-margin_top = 450.0
-margin_right = 500.0
-margin_bottom = 490.0
-rect_min_size = Vector2( 500, 40 )
-theme = ExtResource( 1 )
-text = "Se tidligere tests"
-align = 0
-
-[node name="Button13" type="Button" parent="TabContainer/Elev_Side/Panel2/ScrollContainer/VBoxContainer"]
-margin_top = 500.0
-margin_right = 500.0
-margin_bottom = 540.0
-rect_min_size = Vector2( 500, 40 )
-theme = ExtResource( 1 )
-text = "Se tidligere tests"
-align = 0
-
-[node name="Button14" type="Button" parent="TabContainer/Elev_Side/Panel2/ScrollContainer/VBoxContainer"]
-margin_top = 550.0
-margin_right = 500.0
-margin_bottom = 590.0
-rect_min_size = Vector2( 500, 40 )
-theme = ExtResource( 1 )
-text = "Se tidligere tests"
-align = 0
+text = "Fortsæt"
 
 [node name="Side_bar" type="Control" parent="."]
 margin_left = -55.0
@@ -406,7 +998,18 @@ anims/Hide = SubResource( 5 )
 anims/RESET = SubResource( 6 )
 anims/Show = SubResource( 7 )
 
-[connection signal="pressed" from="TabContainer/Log_Ind_valg/HBoxContainer/Button" to="." method="go_to_tab" binds= [ 1 ]]
-[connection signal="pressed" from="TabContainer/Log_Ind_valg/HBoxContainer/Button2" to="." method="go_to_tab" binds= [ 1 ]]
-[connection signal="pressed" from="TabContainer/Log_Ind/HBoxContainer/Button3" to="." method="go_to_tab" binds= [ 2 ]]
+[connection signal="pressed" from="TabContainer/Log_Ind_valg/HBoxContainer/Button" to="." method="go_to_login" binds= [ 0 ]]
+[connection signal="pressed" from="TabContainer/Log_Ind_valg/HBoxContainer/Button2" to="." method="go_to_login" binds= [ 1 ]]
+[connection signal="pressed" from="TabContainer/Log_Ind/HBoxContainer/Button3" to="." method="check_log_ind"]
+[connection signal="pressed" from="TabContainer/Elev_Test/Button3" to="." method="check_svar"]
+[connection signal="pressed" from="TabContainer/Elev_Test/Button4" to="." method="next_question"]
+[connection signal="pressed" from="TabContainer/Laerer_Side/CenterContainer/VBoxContainer/Button3" to="." method="go_to_tab" binds= [ 5 ]]
+[connection signal="pressed" from="TabContainer/Laerer_Side/CenterContainer/VBoxContainer/Button4" to="." method="go_to_tab" binds= [ 10 ]]
+[connection signal="pressed" from="TabContainer/Klasse_side_1/CenterContainer/VBoxContainer/Button3" to="." method="go_to_tab" binds= [ 6 ]]
+[connection signal="pressed" from="TabContainer/Klasse_side_1/CenterContainer/VBoxContainer/Button4" to="." method="go_to_tab" binds= [ 7 ]]
+[connection signal="pressed" from="TabContainer/Klasse_side_1/CenterContainer/VBoxContainer/Button5" to="." method="go_to_tab" binds= [ 9 ]]
+[connection signal="pressed" from="TabContainer/Opret_Klasse_Side_1/CenterContainer/VBoxContainer/Button4" to="." method="create_klasse"]
+[connection signal="pressed" from="TabContainer/Laerer_Test_Muligheder/CenterContainer/VBoxContainer/Button3" to="." method="go_to_tab" binds= [ 12 ]]
+[connection signal="pressed" from="TabContainer/Laerer_Test_Muligheder/CenterContainer/VBoxContainer/Button4" to="." method="go_to_tab" binds= [ 10 ]]
+[connection signal="pressed" from="TabContainer/Test_resultat/VBoxContainer/CenterContainer/Button3" to="." method="go_to_tab" binds= [ 2 ]]
 [connection signal="pressed" from="Side_bar/Back_Button" to="." method="go_back"]
