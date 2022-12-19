@@ -7,10 +7,14 @@ var login_side = 0
 var current_question = 0
 var current_test_array : Array = []
 
+var selected_elev = null
+
 func _ready():
 	add_child(logic) 
 
 func _process(_delta):
+	$CanvasLayer2/TextureRect.rect_position = get_global_mouse_position()/100 - Vector2(60,60)
+	
 	if get_global_mouse_position().x <= 52 and $Side_bar.rect_position.x < 0 and $AnimationPlayer.current_animation != "Show":
 		$AnimationPlayer.play("Show")
 	elif get_global_mouse_position().x > 52 and $Side_bar.rect_position.x > -55 and $AnimationPlayer.current_animation != "Hide":
@@ -18,6 +22,7 @@ func _process(_delta):
 
 
 func go_to_tab(tab_value):
+	
 	
 	for n in $TabContainer.get_child($TabContainer.current_tab).get_children():
 		if n.is_class("VBoxContainer"):
@@ -35,6 +40,8 @@ func go_to_tab(tab_value):
 			for n in $TabContainer/Elev_Side/Panel2/ScrollContainer/VBoxContainer.get_children():
 				#print(n)
 				n.queue_free()
+
+			var elev_tests = check_om_eleven_har_taget_testen(Data.current_user_id)
 			
 			Data.db.query("select * from elever")
 			var elev_data = Data.db.query_result.duplicate()
@@ -42,16 +49,20 @@ func go_to_tab(tab_value):
 			Data.db.query("select * from tildelt_test")
 			var test_data = Data.db.query_result.duplicate()
 			
-			for n in Data.db.query_result.size():
+
+			for n in test_data.size():
 
 				
-				if test_data[n]["klasseID"] == elev_data[Data.current_user_id]["klasseID"]:
+				if test_data[n]["klasseID"] == elev_data[Data.current_user_id]["klasseID"] and not elev_tests.has(n):
 					var new_button = $TabContainer/Elev_Side/Button3.duplicate()
 					new_button.modulate.a = 1
 					$TabContainer/Elev_Side/Panel2/ScrollContainer/VBoxContainer.add_child(new_button)
 					
 					Data.db.query("select * from tests")
-					new_button.text = Data.db.query_result[n]["navn"]
+					var text
+					for a in Data.db.query_result.size():
+						text = (Data.db.query_result[a]["navn"])
+					new_button.text = text
 					new_button.connect("pressed",self,"start_test",[test_data[n]["testID"]])
 		3:
 			set_question()
@@ -110,13 +121,94 @@ func go_to_tab(tab_value):
 				
 				var new_button = $TabContainer/Tildel_test_valg/Button3.duplicate()
 				new_button.modulate.a = 1
+				new_button.self_modulate.a = 1
 				$TabContainer/Tildel_test_valg/ScrollContainer/VBoxContainer.add_child(new_button)
 				new_button.text = Data.db.query_result[n]["navn"]
-				
+				#print(new_button)
 				new_button.connect("pressed",self,"give_test",[new_button.get_index() + 1])
+				
+		14:
+			var test_array = check_hvilke_tests_eleven_har_taget(Data.current_user_id).duplicate()
+			
+			print(test_array)
+			
+			for n in $TabContainer/Se_resultater/ScrollContainer/VBoxContainer.get_children():
+				#print(n)
+				n.queue_free()
+				
 
+			
+			for n in test_array:
+				
+				
+				
+				var new_button = $TabContainer/Se_resultater/Button3.duplicate()
 
+				$TabContainer/Se_resultater/ScrollContainer/VBoxContainer.add_child(new_button)
 
+				#print(n)
+				Data.db.query("select * from tests")
+				var tests_data = Data.db.query_result.duplicate()
+				
+				Data.db.query("select * from TESTRESULTAT_" + str(n+1))
+				
+				
+				#print(Data.db.query_result)
+				#Data.db.query_result[Data.current_user_id]
+				var data_1
+				var data_2
+				
+				for a in Data.db.query_result.size():
+					if Data.db.query_result[a]["elevID"] == Data.current_user_id:
+						data_1 = Data.db.query_result[a]["resultat"]
+						data_2 = Data.db.query_result[a]["karakter"]
+				
+				new_button.text = str(tests_data[n]["navn"]) + " | " + str(data_1) + " | " + str(data_2)
+				#print(new_button.text)
+		15:
+			for n in $TabContainer/Se_resultater_elev_valg/ScrollContainer/VBoxContainer.get_children():
+				#print(n)
+				n.queue_free()
+				
+			Data.db.query("select * from Elever")
+			for n in Data.db.query_result.size():
+				
+				var new_button = $TabContainer/Se_resultater_elev_valg/Button3.duplicate()
+				new_button.modulate.a = 1
+				new_button.self_modulate.a = 1
+				$TabContainer/Se_resultater_elev_valg/ScrollContainer/VBoxContainer.add_child(new_button)
+				new_button.text = Data.db.query_result[n]["navn"]
+				#print(new_button)
+				new_button.connect("pressed",self,"select_elev",[new_button.get_index()])
+			
+		16:
+			var test_array = check_hvilke_tests_eleven_har_taget(selected_elev).duplicate()
+			
+			for n in $"TabContainer/Se_resultater_lære_elev/ScrollContainer/VBoxContainer".get_children():
+				#print(n)
+				n.queue_free()
+				
+
+			
+			for n in test_array:
+				
+				
+				
+				var new_button = $"TabContainer/Se_resultater_lære_elev/Button3".duplicate()
+
+				$"TabContainer/Se_resultater_lære_elev/ScrollContainer/VBoxContainer".add_child(new_button)
+
+				#print(n)
+				Data.db.query("select * from tests")
+				var tests_data = Data.db.query_result.duplicate()
+				
+				Data.db.query("select * from TESTRESULTAT_" + str(n+1))
+				
+				
+				#print(Data.db.query_result)
+				#Data.db.query_result[Data.current_user_id]
+				new_button.text = str(tests_data[n]["navn"]) + " | " + str(Data.db.query_result[selected_elev]["resultat"]) + " | " + str(Data.db.query_result[selected_elev]["karakter"])
+				#print(new_button.text)
 
 
 	$TabContainer.current_tab = tab_value
@@ -160,6 +252,9 @@ func generate_elever():
 	for n in $TabContainer/Rediger_Klasser2/Panel/Panel5/ScrollContainer/VBoxContainer.get_children():
 		n.queue_free()
 	Data.db.query("select * from Elever")
+	
+
+	
 	for n in Data.db.query_result.size():
 		var new_button = $TabContainer/Rediger_Klasser2/Button3.duplicate()
 		new_button.modulate.a = 1
@@ -290,6 +385,7 @@ func get_grade(value):
 		return 12
 	if value > 100:
 		return 12
+		
 
 func answear_notif(text : String, correct : bool):
 	$TabContainer/Elev_Test/Label.text = text
@@ -313,6 +409,42 @@ func check_svar():
 	
 	$TabContainer/Elev_Test/Button3.disabled = true
 	$TabContainer/Elev_Test/Button4.disabled = false
+
+func check_om_eleven_har_taget_testen(id):
+	Data.db.query("select * from sqlite_master where type = 'table' and name like 'TESTRESULTAT_%'")
+	
+	var result_1 = Data.db.query_result.duplicate()
+	var return_array = []
+	
+	
+	for n in result_1.size():
+		Data.db.query("select * from TESTRESULTAT_" + str(n+1))
+		for i in Data.db.query_result.size():
+			if Data.db.query_result[i]["elevID"] == id:
+				return_array.append(i)
+		
+	return return_array
+
+func select_elev(id):
+	selected_elev = id
+	go_to_tab(16)
+
+func check_hvilke_tests_eleven_har_taget(id : int):
+	Data.db.query("select * from sqlite_master where type = 'table' and name like 'TESTRESULTAT_%'")
+	
+	var result_1 = Data.db.query_result.duplicate()
+	var return_array = []
+
+	
+	for n in result_1.size():
+		Data.db.query("select * from TESTRESULTAT_" + str(n+1))
+		print(Data.db.query_result[0]["elevID"])
+		print(id)
+		if Data.db.query_result[0]["elevID"] == id:
+			return_array.append(n)
+		
+	return return_array
+		
 
 func check_log_ind():
 	if login_side == 0:
@@ -339,8 +471,10 @@ func check_log_ind():
 		Data.current_user_id = index
 		Data.current_user_type = login_side
 		if login_side == 0:
+			
 			go_to_tab(2)
 			$TabContainer/Elev_Side/ColorRect/Label.text = "Hej " + Data.db.query_result[index]["navn"]
+			check_om_eleven_har_taget_testen(Data.current_user_id)
 		else:
 			go_to_tab(4)
 			$TabContainer/Laerer_Side/ColorRect/Label.text = "Hej " + Data.db.query_result[index]["navn"]
