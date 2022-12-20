@@ -231,7 +231,7 @@ layer = -3
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer2"]
 visible = false
-modulate = Color( 0.247059, 0.270588, 0.392157, 1 )
+modulate = Color( 0.0509804, 0.0666667, 0.152941, 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = 160.0
@@ -249,7 +249,6 @@ margin_bottom = -32.0
 mouse_filter = 1
 
 [node name="Log_Ind_valg" type="Tabs" parent="TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -429,7 +428,6 @@ text = "Mat test 1a1 - Linære Funktioner"
 align = 0
 
 [node name="Elev_Test" type="Tabs" parent="TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -459,6 +457,7 @@ margin_bottom = 108.0
 theme = ExtResource( 1 )
 custom_fonts/font = SubResource( 13 )
 text = "Spørgsmål"
+autowrap = true
 
 [node name="Label" type="Label" parent="TabContainer/Elev_Test"]
 modulate = Color( 1, 1, 1, 0 )
@@ -515,6 +514,7 @@ anims/correct = SubResource( 15 )
 anims/wrong = SubResource( 16 )
 
 [node name="Laerer_Side" type="Tabs" parent="TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -1054,6 +1054,7 @@ rect_min_size = Vector2( 400, 40 )
 custom_constants/separation = 20
 
 [node name="Se_resultater_lære_elev" type="Tabs" parent="TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
