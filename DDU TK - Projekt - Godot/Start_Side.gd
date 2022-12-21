@@ -208,6 +208,11 @@ func go_to_tab(tab_value):
 				
 				#print(Data.db.query_result)
 				#Data.db.query_result[Data.current_user_id]
+				var data_1
+				var data_2
+				
+				
+				
 				new_button.text = str(tests_data[n]["navn"]) + " | " + str(Data.db.query_result[selected_elev]["resultat"]) + " | " + str(Data.db.query_result[selected_elev]["karakter"])
 				#print(new_button.text)
 
