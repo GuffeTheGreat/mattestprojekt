@@ -36,6 +36,9 @@ func go_to_tab(tab_value):
 
 	
 	match tab_value:
+		1:
+			$TabContainer/Log_Ind/HBoxContainer/Button.text = ""
+			$TabContainer/Log_Ind/HBoxContainer/Button2.text = ""
 		2:
 			for n in $TabContainer/Elev_Side/Panel2/ScrollContainer/VBoxContainer.get_children():
 				#print(n)
@@ -153,8 +156,6 @@ func go_to_tab(tab_value):
 				Data.db.query("select * from TESTRESULTAT_" + str(n+1))
 				
 				
-				#print(Data.db.query_result)
-				#Data.db.query_result[Data.current_user_id]
 				var data_1
 				var data_2
 				
@@ -289,7 +290,35 @@ func remove_elev(id):
 	generate_elever()
 
 func go_back():
-	go_to_tab(0)
+	match $TabContainer.current_tab:
+		4:
+			go_to_tab(2)
+		7:
+			go_to_tab(5)
+		9:
+			go_to_tab(5)
+			
+		11:
+			go_to_tab(5)
+			
+		12:
+			go_to_tab(5)
+		
+		13:
+			go_to_tab(2)
+			
+		14:
+			go_to_tab(2)
+		
+		15:
+			go_to_tab(5)
+		16:
+			go_to_tab(5)
+		
+		_:
+			go_to_tab($TabContainer.current_tab - 1)
+	
+
 
 func log_in_warning(text : String):
 
